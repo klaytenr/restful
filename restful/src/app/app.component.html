@@ -1,0 +1,30 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<div>
+  <button (click)='getTasksFromService()'>Click to get all tasks</button>
+  <h3>All of the tasks:</h3>
+  <div *ngIf='taskEdit.length > 0'>
+    <form (submit)="onSubmitEdit(taskEdit[0])">
+      <input type="text" name="taskEdit[0].title" [(ngModel)]="taskEdit[0].title" />
+      <input type="text" name="taskEdit[0].description" [(ngModel)]="taskEdit[0].description" />
+      <input type="submit" value="Edit Task" />
+    </form>
+  </div>
+  <div *ngFor="let task of tasks">
+    <p>{{task.title}} - {{task.description}}</p>
+    {{task._id}}
+    <p><button (click)='getTask(task._id)'>Edit</button> <button (click)='deleteTask(task._id)'>Delete</button></p>
+  </div>
+  <h2>New Task</h2>
+  <form (submit)="onSubmit()">
+    <p> {{ newTask | json }} </p>
+    <input type="text" name="newTask.title" [(ngModel)]="newTask.title" />
+    <input type="text" name="newTask.description" [(ngModel)]="newTask.description" />
+    <input type="submit" value="Create Task" />
+  </form>
+</div>
+
